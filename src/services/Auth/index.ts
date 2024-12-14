@@ -107,3 +107,25 @@ export const forgotPassword = async (userData: FieldValues) => {
       throw new Error(error)
   }
 }
+
+
+
+
+export const resetPassword = async (userData: FieldValues) => {
+  try {
+      const { data } = await axiosInstance.post('/auth/reset-password',
+          {
+              newPassword: userData.newPassword
+              , email: userData.email
+          },
+          {
+              headers: {
+                  Authorization: userData.token,
+              }
+          });
+      return data;
+  } catch (error: any) {
+
+      throw new Error(error)
+  }
+}
