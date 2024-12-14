@@ -21,6 +21,19 @@ export const registerCustomer = async (userData: FieldValues) => {
   }
 };
 
+export const registerVendor = async (userData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.post("/user/create-vendor", userData);
+    return data;
+  } catch (error: any) {
+    const data = {
+      success: false,
+      message: error?.response?.data?.message,
+    };
+    return data;
+  }
+};
+
 export const loginUser = async (userData: FieldValues) => {
   try {
     const { data } = await axiosInstance.post("/auth/login", userData);

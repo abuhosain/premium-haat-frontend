@@ -47,25 +47,24 @@ export default function CustomerRegisterPage() {
           },
         })
       );
-      handleUserRegistration(formData); // Send the form data to the backend
+      handleUserRegistration(formData);
     } else {
-      toast.error("Please input profile picture"); // Error if no image is selected
+      toast.error("Please input profile picture");
     }
   };
 
   // Handle image file change
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files![0]; // Access the selected file
-    setImageFiles(files); // Set the file in the state
+    const files = e.target.files![0];
+    setImageFiles(files);
   };
 
-  // Handle API response for success or error
   useEffect(() => {
     if (data && !data?.success) {
-      toast.error(data?.message as string); // Show error message if registration fails
+      toast.error(data?.message as string);
     }
     if (isSuccess && data?.success) {
-      toast.success("User created successfully"); // Show success message
+      toast.success("Customer created successfully");
       router.push("/"); // Redirect to homepage or login page after success
     }
   }, [data, isSuccess, router]);
@@ -77,7 +76,10 @@ export default function CustomerRegisterPage() {
         <h3 className="my-2 text-xl font-bold">Register as a Customer</h3>
         <p className="mb-4">For Better User Experience</p>
         <div className="w-[35%]">
-          <PHForm resolver={zodResolver(registerValidationSchema)}  onSubmit={onSubmit}>
+          <PHForm
+            resolver={zodResolver(registerValidationSchema)}
+            onSubmit={onSubmit}
+          >
             {/* Input fields for registration */}
             <div className="py-3">
               <PHInput label="First Name" name="firstName" size="sm" />
