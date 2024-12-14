@@ -20,7 +20,7 @@ export interface IUser {
   id: string;
   name: string;
   img: string;
-  phone: string;
-  iat: number;
-  exp: number;
+  phone?: string;
+  iat?: number;
+  exp?: number;
 }

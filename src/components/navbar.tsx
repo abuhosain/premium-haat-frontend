@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+"use client";
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -12,14 +13,16 @@ import { Link } from "@nextui-org/link";
 import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
- 
+
 import NavbarDropdown from "./UI/NavbarDropdown";
 
 import { Logo } from "@/src/components/icons";
 import { siteConfig } from "@/src/config/site";
 import { ThemeSwitch } from "@/src/components/theme-switch";
+import { useUser } from "../context/user.provider";
 
 export const Navbar = () => {
+  const { user } = useUser();
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -54,10 +57,15 @@ export const Navbar = () => {
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
         </NavbarItem>
-        <NavbarItem className="flex gap-1">
-         
-          <NavbarDropdown />
-        </NavbarItem>
+        {user?.email ? (
+          <NavbarItem className="flex gap-1">
+            <NavbarDropdown />
+          </NavbarItem>
+        ) : (
+          <NavbarItem className="flex gap-1">
+            <Link href="/login">Login</Link>
+          </NavbarItem>
+        )}
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">

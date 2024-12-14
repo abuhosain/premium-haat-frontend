@@ -19,12 +19,8 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Check if user is authenticated
-  // const user = {
-  //   role: "ADMIN",
-  // };
 
   const user = await getCurrentUser();
-  console.log(user)
 
   // If user is not authenticated
   if (!user) {
