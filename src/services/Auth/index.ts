@@ -1,6 +1,7 @@
 "use server";
 
 import axiosInstance from "@/src/lib/AxiousInstance";
+import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 
@@ -34,5 +35,29 @@ export const loginUser = async (userData: FieldValues) => {
       message: error?.response?.data?.message,
     };
     return data;
+  }
+};
+
+export const logOut = async () => {
+  (await cookies()).delete("accessToken");
+  (await cookies()).delete("refreshToken");
+};
+
+export const getCurrentUser = async () => {
+  const accessToken = (await cookies()).get("accessToken")?.value;
+  let decodedToken = null;
+
+  if (accessToken) {
+    decodedToken = await jwtDecode(accessToken);
+    return {
+      id: decodedToken?.id,
+      email: decodedToken?.email,
+      role: decodedToken?.role,
+      name: decodedToken?.name,
+      img: decodedToken?.img,
+      phoone: decodedToken?.phone,
+    };
+  } else {
+    return decodedToken;
   }
 };

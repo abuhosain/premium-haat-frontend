@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
+import { getCurrentUser } from "./services/Auth";
 
 // Define authentication and protected routes
 const AuthRoutes = ["/login", "/register"];
@@ -18,9 +19,12 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Check if user is authenticated
-  const user = {
-    role: "ADMIN",
-  };
+  // const user = {
+  //   role: "ADMIN",
+  // };
+
+  const user = await getCurrentUser();
+  console.log(user)
 
   // If user is not authenticated
   if (!user) {

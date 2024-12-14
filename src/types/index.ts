@@ -11,5 +11,16 @@ export interface IInput {
   type?: string;
   label?: string;
   name: string;
-  disabled? : boolean;
+  disabled?: boolean;
+}
+
+export interface IUser {
+  email: string;
+  role: string;
+  id: string;
+  name: string;
+  img: string;
+  phone: string;
+  iat: number;
+  exp: number;
 }

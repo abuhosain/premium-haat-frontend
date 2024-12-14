@@ -7,7 +7,7 @@ import { IInput } from "@/src/types";
 
 interface IProps extends IInput {}
 
-export default function FXInput({
+export default function PHInput({
   variant = "bordered",
   size = "md",
   required = false,
