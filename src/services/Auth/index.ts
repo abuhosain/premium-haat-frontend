@@ -138,3 +138,8 @@ export const changePassword = async (passwordData: FieldValues) => {
     throw new Error(error);
   }
 };
+
+export const cureentUserChecker = async () => {
+  const token = (await cookies()).get("accessToken")?.value;
+  return token;
+};
