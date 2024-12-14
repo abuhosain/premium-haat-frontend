@@ -76,7 +76,6 @@ export const getCurrentUser = async () => {
   }
 };
 
-
 export const getNewAccessToken = async () => {
   try {
     const refreshToken = (await cookies()).get("refreshToken")?.value;
@@ -96,36 +95,46 @@ export const getNewAccessToken = async () => {
   }
 };
 
-
-  
 export const forgotPassword = async (userData: FieldValues) => {
   try {
-      const { data } = await axiosInstance.post('/auth/forget-password', userData);
-      return data;
+    const { data } = await axiosInstance.post(
+      "/auth/forget-password",
+      userData
+    );
+    return data;
   } catch (error: any) {
-
-      throw new Error(error)
+    throw new Error(error);
   }
-}
-
-
-
+};
 
 export const resetPassword = async (userData: FieldValues) => {
   try {
-      const { data } = await axiosInstance.post('/auth/reset-password',
-          {
-              newPassword: userData.newPassword
-              , email: userData.email
-          },
-          {
-              headers: {
-                  Authorization: userData.token,
-              }
-          });
-      return data;
+    const { data } = await axiosInstance.post(
+      "/auth/reset-password",
+      {
+        newPassword: userData.newPassword,
+        email: userData.email,
+      },
+      {
+        headers: {
+          Authorization: userData.token,
+        },
+      }
+    );
+    return data;
   } catch (error: any) {
-
-      throw new Error(error)
+    throw new Error(error);
   }
-}
+};
+
+export const changePassword = async (passwordData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.post(
+      "/auth/change-password",
+      passwordData
+    );
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
