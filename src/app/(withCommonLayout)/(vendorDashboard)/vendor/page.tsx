@@ -1,9 +1,10 @@
-import React from 'react'
+import VendorProfile from "@/src/components/vendorDashbaord/VendorProfiile";
+import React from "react";
 
-const page = () => {
-  return (
-    <div>page</div>
-  )
-}
+const VendorPage = () => {
+  return <div>
+    <VendorProfile />
+  </div>;
+};
 
-export default page
+export default VendorPage;

@@ -45,9 +45,7 @@ const CustomerDashboardLayout = ({ children }: { children: ReactNode }) => {
                 </p>
               </Link>
 
-             
-
-              <Link href="/user/create-recipe">
+              <Link href="/vendor/create-product">
                 <p className="flex mt-3 items-center text-gray-700 hover:text-blue-500 transition-colors duration-200 text-lg lg:text-xl">
                   <FaPlusCircle className="h-6 w-6 lg:h-7 lg:w-7" />
                   <span className="ml-3 hidden lg:block">Create Product</span>
@@ -83,8 +81,6 @@ const CustomerDashboardLayout = ({ children }: { children: ReactNode }) => {
           </button>
           <h1 className="text-xl font-bold text-gray-800">Dashboard</h1>
         </div>
-
-       
 
         {/* Main Content Section */}
         <main className="flex-1 p-4 lg:p-8">{children}</main>
