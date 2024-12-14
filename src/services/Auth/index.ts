@@ -95,3 +95,15 @@ export const getNewAccessToken = async () => {
     throw new Error("Failed to get new access token");
   }
 };
+
+
+  
+export const forgotPassword = async (userData: FieldValues) => {
+  try {
+      const { data } = await axiosInstance.post('/auth/forget-password', userData);
+      return data;
+  } catch (error: any) {
+
+      throw new Error(error)
+  }
+}
