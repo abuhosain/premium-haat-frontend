@@ -1,6 +1,7 @@
 "use server";
 
 import axiosInstance from "@/src/lib/AxiousInstance";
+import { FieldValues } from "react-hook-form";
 
 export const getVendor = async () => {
   let fetchOptions = {};
@@ -21,4 +22,17 @@ export const getAllProdutByVendor = async () => {
     fetchOptions
   );
   return data;
+};
+
+export const updateVendor = async (updatedData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.put("/vendor/update", updatedData);
+    return data;
+  } catch (error: any) {
+    const data = {
+      success: false,
+      message: error?.response?.data?.message,
+    };
+    return data; // Fallback error
+  }
 };
