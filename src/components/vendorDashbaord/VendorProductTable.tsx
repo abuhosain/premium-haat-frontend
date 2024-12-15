@@ -26,8 +26,8 @@ const ProductTable = ({
         await deleteProduct(id);
         toast.success("Recipe deleted successfully!");
 
-        setProducts((prevRecipes) =>
-          prevRecipes.filter((recipe) => recipe._id !== id)
+        setProducts((prevProduct) =>
+          prevProduct.filter((product) => product.id !== id)
         );
       } catch (error) {
         toast.error("Failed to delete the recipe.");
@@ -88,14 +88,14 @@ const ProductTable = ({
                   </Link>
                   <button
                     className={`bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 ${
-                      deletingId === product._id
+                      deletingId === product.id
                         ? "opacity-50 cursor-not-allowed"
                         : ""
                     }`}
-                    disabled={deletingId === product._id} // Disable only the button for the recipe being deleted
-                    onClick={() => handleDelete(product._id)}
+                    disabled={deletingId === product.id}  
+                    onClick={() => handleDelete(product.id)}
                   >
-                    {deletingId === product._id ? "Deleting..." : "Delete"}
+                    {deletingId === product.id ? "Deleting..." : "Delete"}
                   </button>
                 </td>
               </tr>
