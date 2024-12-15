@@ -5,7 +5,7 @@ import React from "react";
 
 const VendorProfile = () => {
   const { data: vendor } = useGetVendor();
-
+  console.log(vendor);
   return (
     <div className="vendor-profile-page flex flex-col items-center">
       {/* Profile Card */}
@@ -64,24 +64,28 @@ const VendorProfile = () => {
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {vendor?.data?.product?.length > 0 ? (
-            vendor.data.product.slice(0, 4).map((product: any, index: number) => (
-              <div
-                key={product.id || index}
-                className="product-card bg-gray-50 border border-gray-200 rounded-lg p-4 flex flex-col items-center"
-              >
-                <Image
-                  alt={product.name || "Product Image"}
-                  className="object-cover mb-2"
-                  height={150}
-                  src={product.img || "https://via.placeholder.com/150"}
-                  width={150}
-                />
-                <h3 className="text-sm font-medium text-gray-700">
-                  {product.title || "Unnamed Product"}
-                </h3>
-                <p className="text-gray-500 text-xs">Price: ${product.price || "N/A"}</p>
-              </div>
-            ))
+            vendor.data.product
+              .slice(0, 4)
+              .map((product: any, index: number) => (
+                <div
+                  key={product.id || index}
+                  className="product-card bg-gray-50 border border-gray-200 rounded-lg p-4 flex flex-col items-center"
+                >
+                  <Image
+                    alt={product.name || "Product Image"}
+                    className="object-cover mb-2"
+                    height={150}
+                    src={product.img || "https://via.placeholder.com/150"}
+                    width={150}
+                  />
+                  <h3 className="text-sm font-medium text-gray-700">
+                    {product.title || "Unnamed Product"}
+                  </h3>
+                  <p className="text-gray-500 text-xs">
+                    Price: ${product.price || "N/A"}
+                  </p>
+                </div>
+              ))
           ) : (
             <p className="text-gray-600 text-center col-span-full">
               No products available.
@@ -111,9 +115,7 @@ const VendorProfile = () => {
               </div>
             ))
           ) : (
-            <p className="text-gray-600 text-center">
-              No reviews available.
-            </p>
+            <p className="text-gray-600 text-center">No reviews available.</p>
           )}
         </div>
       </div>

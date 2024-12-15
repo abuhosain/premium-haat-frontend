@@ -10,7 +10,8 @@ import {
   FaBook,
   FaBars,
   FaTimes,
-} from "react-icons/fa"; // Importing from Font Awesome
+  FaClipboardList, // Importing new icon for "My Order"
+} from "react-icons/fa";
 
 const CustomerDashboardLayout = ({ children }: { children: ReactNode }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -63,13 +64,20 @@ const CustomerDashboardLayout = ({ children }: { children: ReactNode }) => {
                   <span className="ml-3 hidden lg:block">My Products</span>
                 </p>
               </Link>
+              {/* My Order Link */}
+              <Link href="/vendor/order">
+                <p className="flex mt-3 items-center text-gray-700 hover:text-blue-500 transition-colors duration-200 text-lg lg:text-xl">
+                  <FaClipboardList className="h-6 w-6 lg:h-7 lg:w-7" />
+                  <span className="ml-3 hidden lg:block">Orders</span>
+                </p>
+              </Link>
             </nav>
           </div>
         </div>
       </aside>
 
       {/* Main Content Area */}
-      <div className="w-full flex flex-col lg:ml-64 ">
+      <div className="w-full flex flex-col lg:ml-64">
         {/* Sidebar Toggle Button for Mobile */}
         <div className="flex justify-between items-center bg-white p-4 shadow-lg lg:hidden z-50">
           <button className="text-gray-700" onClick={toggleSidebar}>
