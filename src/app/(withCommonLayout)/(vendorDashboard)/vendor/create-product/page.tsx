@@ -2,12 +2,12 @@
 
 import PHForm from "@/src/components/form/PHForm";
 import PHInput from "@/src/components/form/PHInput";
+import PHSelect from "@/src/components/form/PHSelect";
 import PHTextarea from "@/src/components/form/PHTextArea";
 import Loading from "@/src/components/UI/Loading";
-import { useUser } from "@/src/context/user.provider";
+import { useGetAllCateogry } from "@/src/hooks/category.hooks";
 import { useCreateProduct } from "@/src/hooks/product.hooks";
 import { createProductValidationSchema } from "@/src/schema/product.schema";
-import { getCurrentUser } from "@/src/services/Auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nextui-org/button";
 import { useRouter } from "next/navigation";
@@ -15,129 +15,99 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
-export default function CreatProductPage() {
-  const { user } = useUser();
+export default function CreateProductPage() {
+  const { data: Category, isLoading, isError } = useGetAllCateogry();
   const router = useRouter();
   const [imageFiles, setImageFiles] = useState<File | null>(null);
-  const {
-    mutate: handleCreateProduct,
-    isPending,
-    isSuccess,
-    data,
-  } = useCreateProduct();
+  const { mutate: handleCreateProduct, isPending, isSuccess, data } =
+    useCreateProduct();
 
-  // Handle form submission
-  const onSubmit: SubmitHandler<FormData> = (data: any) => {
-    console.log(user?.id)
-    const formData = new FormData();
+  const categoryData = Category?.data?.map((item: { id: string; name: string }) => ({
+    key: item.id,
+    label: item.name,
+  }));
 
-    // Check if a profile picture is selected
-    if (imageFiles !== null) {
-      formData.append("file", imageFiles); // Append image
-      // Append password and customer details as JSON string
-      formData.append(
-        "data",
-        JSON.stringify({
-          vendorId: "57dd87ec-d31b-4760-9392-2eafe0610173",
-          categoryId: data.categoryId,
-          title: data.title,
-          description: data.description,
-          price: data.price,
-          quantity: data.quantity,
-          discount: data.discount,
-        })
-      );
-      handleCreateProduct(formData);
-    } else {
-      toast.error("Please input profile picture");
+  const onSubmit: SubmitHandler<FormData> = (formData: any) => {
+    if (!imageFiles) {
+      toast.error("Please input product image");
+      return;
     }
+
+    const data = new FormData();
+    data.append("file", imageFiles);
+    data.append(
+      "data",
+      JSON.stringify({
+        categoryId: formData.categoryId,
+        title: formData.title,
+        description: formData.description,
+        price: formData.price,
+        quantity: formData.quantity,
+        discount: formData.discount,
+      })
+    );
+    handleCreateProduct(data);
   };
 
-  // Handle image file change
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files![0];
     setImageFiles(files);
   };
 
   useEffect(() => {
-    if (data && !data?.success) {
-      toast.error(data?.message as string);
-    }
+    if (data && !data?.success) toast.error(data?.message as string);
     if (isSuccess && data?.success) {
       toast.success("Product created successfully");
-      router.push("/"); // Redirect to homepage or login page after success
+      router.push("/");
     }
   }, [data, isSuccess, router]);
 
+  if (isLoading) return <Loading />;
+  if (isError) return <p className="text-red-500">Failed to load categories</p>;
+
   return (
-    <>
-      {isPending && <Loading />} {/* Show loading state while pending */}
-      <div className="flex h-[calc(100vh-100px)] flex-col items-center justify-center">
-        <h3 className="my-2 text-xl font-bold">Create new product</h3>
-
-        <div className="w-[35%]">
-          <PHForm
-            resolver={zodResolver(createProductValidationSchema)}
-            onSubmit={onSubmit}
+    <div className="flex h-[calc(100vh-100px)] flex-col items-center justify-center border p-6">
+      <h3 className="mb-4 text-2xl font-semibold text-gray-800">Create New Product</h3>
+      <div className="w-full max-w-2xl rounded-lg bg-white p-8 shadow-md">
+        <PHForm
+          resolver={zodResolver(createProductValidationSchema)}
+          onSubmit={onSubmit}
+        >
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <PHInput label="Title" name="title" size="sm" />
+            <PHInput label="Price" name="price" size="sm" type="number" />
+            <PHInput label="Quantity" name="quantity" size="sm" type="number" />
+            {categoryData?.length ? (
+              <PHSelect label="Category" name="categoryId" options={categoryData} />
+            ) : (
+              <p className="col-span-full text-red-500">No categories available</p>
+            )}
+            <PHInput label="Discount" name="discount" size="sm" type="number" />
+          </div>
+          <div className="my-6">
+            <PHTextarea label="Description" name="description" size="sm" />
+          </div>
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700" htmlFor="image">
+              Upload Product Image
+            </label>
+            <input
+              className="mt-2 block w-full rounded border-gray-300 text-sm text-gray-800 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              id="image"
+              type="file"
+              onChange={handleImageChange}
+            />
+          </div>
+          <Button
+            className="w-full bg-indigo-600 text-white hover:bg-indigo-700"
+            isLoading={isPending}
+            size="lg"
+            type="submit"
           >
-            {/* Input fields for registration */}
-            <div className="py-3">
-              <PHInput label="Title" name="title" size="sm" />
-            </div>
-            <div className="py-3">
-              <PHInput label="Price" name="price" size="sm" type="number" />
-            </div>
-            <div className="py-3">
-              <PHInput
-                label="Quantity"
-                name="quantity"
-                size="sm"
-                type="number"
-              />
-            </div>
-            <div className="py-3">
-              <PHInput label="Category" name="categoryId" size="sm" />
-            </div>
-            <div className="py-3">
-              <PHInput
-                label="Discount"
-                name="discount"
-                size="sm"
-                type="number"
-              />
-            </div>
-            <div className="py-3">
-              <PHTextarea label="Description" name="description" size="sm" />
-            </div>
-
-            {/* Image upload */}
-            <div className="py-3">
-              <label
-                className="flex h-14 w-full cursor-pointer items-center justify-center rounded-xl border-2 border-default-200 text-default-500 shadow-sm transition-all duration-100 hover:border-default-400"
-                htmlFor="image"
-              >
-                Upload Product Picture
-              </label>
-              <input
-                multiple
-                className="hidden"
-                id="image"
-                type="file"
-                onChange={handleImageChange}
-              />
-            </div>
-
-            {/* Submit button */}
-            <Button
-              className="my-3 w-full rounded-md bg-default-900 text-default"
-              size="lg"
-              type="submit"
-            >
-              Create Product
-            </Button>
-          </PHForm>
-        </div>
+            {isPending ? "Creating..." : "Create Product"}
+          </Button>
+        </PHForm>
       </div>
-    </>
+    </div>
   );
 }
