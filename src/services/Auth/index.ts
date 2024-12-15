@@ -98,7 +98,7 @@ export const getNewAccessToken = async () => {
 export const forgotPassword = async (userData: FieldValues) => {
   try {
     const { data } = await axiosInstance.post(
-      "/auth/forget-password",
+      "/auth/forgot-password",
       userData
     );
     return data;
