@@ -57,7 +57,7 @@ const CustomerDashboardLayout = ({ children }: { children: ReactNode }) => {
                   <span className="ml-3 hidden lg:block">Update Vendor</span>
                 </p>
               </Link>
-              <Link href="/user/my-recipes">
+              <Link href="/vendor/product">
                 <p className="flex mt-3 items-center text-gray-700 hover:text-blue-500 transition-colors duration-200 text-lg lg:text-xl">
                   <FaBook className="h-6 w-6 lg:h-7 lg:w-7" />
                   <span className="ml-3 hidden lg:block">My Products</span>

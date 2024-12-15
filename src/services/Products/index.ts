@@ -23,3 +23,9 @@ export const createProduct = async (userData: FieldValues) => {
     return data;
   }
 };
+
+export const deleteProduct = async (id: string) => {
+  const { data } = await axiosInstance.delete(`/product/${id}`);
+  return data;
+};
+
