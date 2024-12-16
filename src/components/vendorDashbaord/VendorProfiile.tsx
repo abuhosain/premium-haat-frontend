@@ -5,7 +5,6 @@ import React from "react";
 
 const VendorProfile = () => {
   const { data: vendor } = useGetVendor();
-  console.log(vendor);
   return (
     <div className="vendor-profile-page flex flex-col items-center">
       {/* Profile Card */}

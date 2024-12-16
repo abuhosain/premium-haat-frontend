@@ -3,9 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ReactNode } from "react";
-import { FaHome, FaUserEdit, FaBook, FaBars, FaTimes, FaUserAltSlash, FaUserCheck } from "react-icons/fa"; // Importing from Font Awesome
+import {
+  FaHome,
+  FaUserEdit,
+  FaBook,
+  FaBars,
+  FaTimes,
+  FaUserAltSlash,
+  FaUserCheck,
+} from "react-icons/fa"; // Importing from Font Awesome
 
-const UserDashboardLayout = ({ children }: { children: ReactNode }) => {
+const AdminDashboardLayout = ({ children }: { children: ReactNode }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -51,7 +59,7 @@ const UserDashboardLayout = ({ children }: { children: ReactNode }) => {
                   <span className="hidden ml-3 lg:block">Manage Category</span>
                 </p>
               </Link>
-                <hr />
+              <hr />
               <Link href="/admin/create-category">
                 <p className="flex mt-3 items-center text-gray-700 hover:text-blue-500 transition-colors duration-200 text-lg lg:text-xl">
                   <FaUserAltSlash className="h-6 w-6 lg:h-7 lg:w-7" />
@@ -96,4 +104,4 @@ const UserDashboardLayout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default UserDashboardLayout;
+export default AdminDashboardLayout;
