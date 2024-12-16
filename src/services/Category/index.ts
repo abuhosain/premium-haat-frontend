@@ -12,16 +12,30 @@ export const getAllCategories = async () => {
   return data;
 };
 
+export const createCategory = async (categoryData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.post(
+      "/category/create-category",
+      categoryData
+    );
+    return data;
+  } catch (error: any) {
+    const data = {
+      success: false,
+      message: error?.response?.data?.message,
+    };
+    return data;
+  }
+};
 
-
-export const updateProduct = async (
-  productId: string,
-  productData: FieldValues
+export const updateCategory = async (
+  categoryId: string,
+  cateogryData: FieldValues
 ) => {
   try {
     const { data } = await axiosInstance.put(
-      `/category/${productId}`,
-      productData
+      `/category/${categoryId}`,
+      cateogryData
     );
     return data;
   } catch (error: any) {
@@ -31,4 +45,9 @@ export const updateProduct = async (
     };
     return data; // Fallback error
   }
+};
+
+export const deleteCategory = async (id: string) => {
+  const { data } = await axiosInstance.delete(`/category/${id}`);
+  return data;
 };

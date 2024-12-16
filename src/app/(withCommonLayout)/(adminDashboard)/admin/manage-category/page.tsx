@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Button } from "@nextui-org/react";
 
 import { useEffect, useState } from "react";
-import ProductTable from "@/src/components/vendorDashbaord/VendorProductTable";
 import { useGetAllCateogry } from "@/src/hooks/category.hooks";
 import CateogryTable from "@/src/components/UI/adminDashboard/CategoryTable";
 
@@ -19,15 +18,15 @@ const ManageCategory = () => {
   }, [data]);
   return (
     <div className="lg:ml-4">
-      <h3 className="text-2xl font-bold mb-4 text-center">My Products</h3>
-      <Link className="flex justify-end" href="/vendor/create-product">
+      <h3 className="text-2xl font-bold mb-4 text-center">Our Category</h3>
+      <Link className="flex justify-end" href="/admin/create-category">
         <Button className="mb-4" color="success">
-          Create Product
+          Create Category
         </Button>
       </Link>
       <CateogryTable
-        isLoading={isPending}
         categories={category}
+        isLoading={isPending}
         setCategory={setCategory}
       />
     </div>

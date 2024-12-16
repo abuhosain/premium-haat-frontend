@@ -71,7 +71,7 @@ export default function UserDashboard() {
             </div>
             <div className="bg-blue-500 text-white p-4 rounded-lg shadow-md flex items-center justify-center cursor-pointer hover:bg-blue-600 transition">
               <FaUsers className="h-6 w-6 mr-2" />
-              <Link href={"/admin/manage-user"}>
+              <Link href={"/admin/manage-users"}>
                 {" "}
                 <span>Manage User</span>
               </Link>
