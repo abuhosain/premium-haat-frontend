@@ -1,10 +1,13 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   BlockUser,
+  BlockVendor,
   DeleteUser,
   getAllActiveUser,
   getAllOrder,
+  getAllVendor,
   UnBlockUser,
+  UnBlockVendor,
 } from "../services/Admin";
 
 export const useGetAllActiveUser = () => {
@@ -18,6 +21,27 @@ export const useGetAllOrder = () => {
   return useQuery<any, Error, any, string[]>({
     queryKey: ["GET_ALL_ORDER"],
     queryFn: async () => await getAllOrder(),
+  });
+};
+
+export const useGetAllVendor = () => {
+  return useQuery<any, Error, any, string[]>({
+    queryKey: ["GET_ALL_VENDOR"],
+    queryFn: async () => await getAllVendor(),
+  });
+};
+
+export const useBlockVendor = () => {
+  return useMutation<any, Error, string>({
+    mutationKey: ["BLOCK_VENDOR"],
+    mutationFn: async (id) => await BlockVendor(id),
+  });
+};
+
+export const useUnBlockVendor = () => {
+  return useMutation<any, Error, string>({
+    mutationKey: ["UNBLOCK_VENDOR"],
+    mutationFn: async (id) => await UnBlockVendor(id),
   });
 };
 

@@ -20,12 +20,32 @@ export const getAllOrder = async () => {
   return data;
 };
 
+export const getAllVendor = async () => {
+  let fetchOptions = {};
+  fetchOptions = {
+    cache: "no-store",
+  };
+  const { data } = await axiosInstance.get("/admin/vendor", fetchOptions);
+  return data;
+};
+
 // delete usser
 export const DeleteUser = async (id: string) => {
   const { data } = await axiosInstance.delete(`/admin/user/${id}`);
   return data;
 };
 
+// block vendor
+export const BlockVendor = async (id: string) => {
+  const { data } = await axiosInstance.put(`/admin/block/vendor/${id}`);
+  return data;
+};
+
+// unblock vendor
+export const UnBlockVendor = async (id: string) => {
+  const { data } = await axiosInstance.put(`/admin/unblock/vendor/${id}`);
+  return data;
+};
 // block usser
 export const BlockUser = async (id: string) => {
   const { data } = await axiosInstance.put(`/admin/block/${id}`);

@@ -45,7 +45,7 @@ const UserTable = ({ user, isLoading, onDelete, onUpdate }: UserTableProps) => {
 
   // Handle Block/Unblock User
   const handleBlockToggle = async (id: string, currentStatus: "ACTIVE" | "BLOCKED") => {
-    const action = currentStatus === "ACTIVE" ? "block" : "unblock"; // Determine action
+    const action = currentStatus === "ACTIVE" ? "Suspned" : "Unsuspend"; // Determine action
     if (confirm(`Are you sure you want to ${action} this user?`)) {
       try {
         if (currentStatus === "ACTIVE") {
@@ -72,13 +72,13 @@ const UserTable = ({ user, isLoading, onDelete, onUpdate }: UserTableProps) => {
   const getRoleColor = (role: "ADMIN" | "CUSTOMER" | "VENDOR") => {
     switch (role) {
       case "ADMIN":
-        return "bg-red-500"; // Admin gets a red badge
+        return "bg-red-500";  
       case "CUSTOMER":
-        return "bg-blue-500"; // Customer gets a blue badge
+        return "bg-blue-500"; 
       case "VENDOR":
-        return "bg-green-500"; // Vendor gets a green badge
+        return "bg-green-500";  
       default:
-        return "bg-gray-500"; // Default to gray if unknown role
+        return "bg-gray-500";  
     }
   };
 
@@ -121,8 +121,8 @@ const UserTable = ({ user, isLoading, onDelete, onUpdate }: UserTableProps) => {
                   {isBlocking || isUnblocking
                     ? "Processing..."
                     : status === "ACTIVE"
-                    ? "Block"
-                    : "Unblock"}
+                    ? "Suspend"
+                    : "Unsuspend"}
                 </button>
 
                 <button
