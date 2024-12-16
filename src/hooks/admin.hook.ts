@@ -3,9 +3,9 @@ import {
   BlockUser,
   DeleteUser,
   getAllActiveUser,
+  getAllOrder,
   UnBlockUser,
 } from "../services/Admin";
-import { toast } from "sonner";
 
 export const useGetAllActiveUser = () => {
   return useQuery<any, Error, any, string[]>({
@@ -14,12 +14,18 @@ export const useGetAllActiveUser = () => {
   });
 };
 
+export const useGetAllOrder = () => {
+  return useQuery<any, Error, any, string[]>({
+    queryKey: ["GET_ALL_ORDER"],
+    queryFn: async () => await getAllOrder(),
+  });
+};
+
 // delete user
 export const useDeleteUser = () => {
   return useMutation<any, Error, string>({
     mutationKey: ["DELETE_USER"],
     mutationFn: async (id) => await DeleteUser(id),
-    
   });
 };
 
@@ -29,7 +35,6 @@ export const useBlockUser = () => {
   return useMutation<any, Error, string>({
     mutationKey: ["BLOCK_USER"],
     mutationFn: async (id) => await BlockUser(id),
-   
   });
 };
 
@@ -37,6 +42,5 @@ export const useUnBlockUser = () => {
   return useMutation<any, Error, string>({
     mutationKey: ["UNBLOCK_USER"],
     mutationFn: async (id) => await UnBlockUser(id),
-    
   });
 };

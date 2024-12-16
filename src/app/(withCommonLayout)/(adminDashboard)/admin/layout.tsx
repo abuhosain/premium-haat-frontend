@@ -39,7 +39,7 @@ const AdminDashboardLayout = ({ children }: { children: ReactNode }) => {
                 </p>
               </Link>
               <hr />
-              <Link href="/admin/manage-users">
+              <Link href="/admin/manage-order">
                 <p className="flex mt-3 items-center text-gray-700 hover:text-blue-500 transition-colors duration-200 text-lg lg:text-xl">
                   <FaUserCheck className="h-6 w-6 lg:h-7 lg:w-7" />
                   <span className="ml-3 hidden lg:block">Order History</span>

@@ -11,22 +11,29 @@ export const getAllActiveUser = async () => {
   return data;
 };
 
-
+export const getAllOrder = async () => {
+  let fetchOptions = {};
+  fetchOptions = {
+    cache: "no-store",
+  };
+  const { data } = await axiosInstance.get("/admin/order", fetchOptions);
+  return data;
+};
 
 // delete usser
 export const DeleteUser = async (id: string) => {
-    const { data } = await axiosInstance.delete(`/admin/user/${id}`);
-    return data;
-  };
-  
-  // block usser
-  export const BlockUser = async (id: string) => {
-    const { data } = await axiosInstance.put(`/admin/block/${id}`);
-    return data;
-  };
-  
-  // unblock usser
-  export const UnBlockUser = async (id: string) => {
-    const { data } = await axiosInstance.put(`/admin/unblock/${id}`);
-    return data;
-  }; 
+  const { data } = await axiosInstance.delete(`/admin/user/${id}`);
+  return data;
+};
+
+// block usser
+export const BlockUser = async (id: string) => {
+  const { data } = await axiosInstance.put(`/admin/block/${id}`);
+  return data;
+};
+
+// unblock usser
+export const UnBlockUser = async (id: string) => {
+  const { data } = await axiosInstance.put(`/admin/unblock/${id}`);
+  return data;
+};
