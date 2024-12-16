@@ -32,7 +32,7 @@ const AdminDashboardLayout = ({ children }: { children: ReactNode }) => {
           <div>
             {/* Navigation Links */}
             <nav className="space-y-8 lg:space-y-12">
-              <Link href="/">
+              <Link href="/admin">
                 <p className="flex mt-3 items-center text-gray-700 hover:text-blue-500 transition-colors duration-200 text-lg lg:text-xl">
                   <FaHome className="h-6 w-6 lg:h-7 lg:w-7" />
                   <span className="ml-3 hidden lg:block">Home</span>
