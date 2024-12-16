@@ -11,6 +11,7 @@ import {
   FaTimes,
   FaUserAltSlash,
   FaUserCheck,
+  FaUserInjured,
 } from "react-icons/fa"; // Importing from Font Awesome
 
 const AdminDashboardLayout = ({ children }: { children: ReactNode }) => {
@@ -50,6 +51,13 @@ const AdminDashboardLayout = ({ children }: { children: ReactNode }) => {
                 <p className="flex mt-3 items-center  hover:text-blue-500 transition-colors duration-200 text-lg lg:text-xl">
                   <FaUserEdit className="h-6 w-6 lg:h-7 lg:w-7" />
                   <span className="ml-3 hidden lg:block">Manage Users</span>
+                </p>
+              </Link>
+              <hr />
+              <Link href="/admin/manage-vendor">
+                <p className="flex mt-3 items-center  hover:text-blue-500 transition-colors duration-200 text-lg lg:text-xl">
+                  <FaUserInjured className="h-6 w-6 lg:h-7 lg:w-7" />
+                  <span className="ml-3 hidden lg:block">Manage Vendor</span>
                 </p>
               </Link>
               <hr />
