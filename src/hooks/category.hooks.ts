@@ -3,6 +3,7 @@ import {
   createCategory,
   deleteCategory,
   getAllCategories,
+  getSingleCategoryById,
   updateCategory,
 } from "../services/Category";
 import { FieldValues } from "react-hook-form";
@@ -19,6 +20,13 @@ export const useCreateCategory = () => {
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["CREATE_CATEGORY"],
     mutationFn: async (userData) => await createCategory(userData),
+  });
+};
+
+export const useGetSingleCategory = (categoryId: string) => {
+  return useQuery<any, Error, any, string[]>({
+    queryKey: ["GET_SINGLE_CATEGORY"],
+    queryFn: async () => await getSingleCategoryById(categoryId),
   });
 };
 

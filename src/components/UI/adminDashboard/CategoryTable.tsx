@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @next/next/no-img-element */
 import { useDeleteCategory } from "@/src/hooks/category.hooks";
-import { useDeleteProduct } from "@/src/hooks/product.hooks";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -79,7 +78,7 @@ const CateogryTable = ({
                 </td>
                 <td className="py-2 px-4">{category.name}</td>
                 <td className="py-2 px-4 mt-3 flex space-x-2">
-                  <Link href={`/vendor/category/${category?.id}`}>
+                  <Link href={`/admin/manage-category/${category?.id}`}>
                     <button className="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600">
                       Update
                     </button>

@@ -1,5 +1,5 @@
 import { z } from "zod";
 
 export const createCategoryValidationSchema = z.object({
-  name: z.string().min(6, "Title must be at least 6 characters."),
+  name: z.string().min(2, "Title must be at least 6 characters."),
 });

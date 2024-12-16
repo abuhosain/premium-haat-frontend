@@ -28,6 +28,11 @@ export const createCategory = async (categoryData: FieldValues) => {
   }
 };
 
+export const getSingleCategoryById = async (id: string) => {
+  const { data } = await axiosInstance.get(`/category/${id}`);
+  return data;
+};
+
 export const updateCategory = async (
   categoryId: string,
   cateogryData: FieldValues
