@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @next/next/no-img-element */
+import { useDeleteCategory } from "@/src/hooks/category.hooks";
 import { useDeleteProduct } from "@/src/hooks/product.hooks";
 import Link from "next/link";
 import { useState } from "react";
@@ -16,7 +17,7 @@ const CateogryTable = ({
   setCategory,
   isLoading,
 }: CateogryTableProps) => {
-  const { mutate: deleteProduct } = useDeleteProduct();
+  const { mutate: deleteProduct } = useDeleteCategory();
   const [deletingId, setDeletingId] = useState<string | null>(null); // Handle deleting state for each recipe
 
   const handleDelete = async (id: string) => {
