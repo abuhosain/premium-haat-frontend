@@ -1,53 +1,80 @@
-# Next.js & NextUI Template
+# E-Commerce Application Frontend
 
-This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
-
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/next-app-template)
+This repository contains the frontend code for our E-Commerce Application, a comprehensive online shopping platform built with React.js and Next.js.
 
 ## Technologies Used
+ 
+- Next.js
+- Axois
+- TypeScript
+- Tailwind CSS (for styling)
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+## Features
 
-## How to Use
+- User authentication (signup, login, password reset)
+- Product browsing with advanced filtering and search
+- Shopping cart functionality
+- Checkout process with payment integration
+- User profiles and order history
+- Vendor dashboard for product management
+- Admin panel for platform management
+- Responsive design for mobile and desktop
 
-### Use the template with create-next-app
+## Installation
 
-To create a new project based on this template using `create-next-app`, run the following command:
+1. Clone the repository:
+   ```
+   git clone https://github.com/abuhosain/premium-haat-frontend.git
+   ```
 
-```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
+2. Navigate to the project directory:
+   ```
+   cd premium-haat-frontend
+   ```
+
+3. Install dependencies:
+   ```
+   npm install
+   ```
+
+4. Create a `.env.local` file in the root directory and add the following environment variables:
+   ```
+   NEXT_PUBLIC_API_URL=http://localhost:5000/api
+   NEXT_PUBLIC_STRIPE_PUBLIC_KEY=your_stripe_public_key
+   ```
+
+## Usage
+
+To start the development server:
+
 ```
-
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
-
-```bash
-npm install
-```
-
-### Run the development server
-
-```bash
 npm run dev
 ```
 
-### Setup pnpm (optional)
+The application will be available at `http://localhost:3000`.
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+## Building for Production
 
-```bash
-public-hoist-pattern[]=*@nextui-org/*
+To create a production build:
+
+```
+npm run build
 ```
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+To start the production server:
 
-## License
+```
+npm start
+```
 
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+## Contributing
+
+We welcome contributions to improve the E-Commerce Application. Please follow these steps:
+
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+ 

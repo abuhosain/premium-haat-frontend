@@ -38,21 +38,24 @@ const ProductDetailsPage = ({ params }: { params: Promise<Params> }) => {
   const isProductInCart = cart.some((item: any) => item.productId === id);
   const currentVendorId = cart[0]?.vendorId; // Assuming vendorId is the same for all items in the cart
 
-  // Handle adding or removing products from the cart
   const handleAddToCart = () => {
     if (isProductInCart) {
-      // Remove product from cart if already exists
-      const updatedCart = cart.filter((item: any) => item.productId !== id);
+      // Product already in cart, so increase quantity by 1
+      const updatedCart = cart.map((item: any) =>
+        item.productId === id
+          ? { ...item, quantity: item.quantity + 1 } // Increase the quantity of the product
+          : item
+      );
       setCart(updatedCart); // Update local state
       localStorage.setItem("cart", JSON.stringify(updatedCart));
-      toast.success("Product removed from cart!");
+      toast.success("Product quantity increased in cart!");
     } else {
       // Check if the vendor ID is the same for all items in the cart
       if (cart.length > 0 && currentVendorId !== vendor?.id) {
-        toast.error("Only delivered by the same vendor!");
+        toast.error("Only delivered by the same vendor! For order, clear the cart.");
       } else {
-        // Add the product to the cart if no issue with the vendor
-        const newProduct = { productId: id, vendorId: vendor?.id };
+        // Add the product with quantity 1 to the cart
+        const newProduct = { productId: id, vendorId: vendor?.id, quantity: 1 };
         const updatedCart = [...cart, newProduct];
         setCart(updatedCart); // Update local state
         localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -60,6 +63,7 @@ const ProductDetailsPage = ({ params }: { params: Promise<Params> }) => {
       }
     }
   };
+  
 
   return (
     <div className="max-w-screen-xl mx-auto p-6">
