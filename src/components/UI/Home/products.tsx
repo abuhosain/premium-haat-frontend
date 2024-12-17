@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@nextui-org/react";
 import { SearchIcon } from "lucide-react";
@@ -50,7 +50,7 @@ export default function ProductHome() {
         setItems((prevItems) => [...prevItems, ...FeedData?.data]);
       }
     } catch (error) {
-      console.error("Error fetching products:", error);
+      // console.error("Error fetching products:", error);
     } finally {
       setLoading(false);
     }
@@ -105,8 +105,8 @@ export default function ProductHome() {
 
             <div className="sm:ml-4">
               <select
-                onChange={(e) => setSelectedSort(e.target.value)}
                 className="border rounded-md p-2 mr-2"
+                onChange={(e) => setSelectedSort(e.target.value)}
               >
                 <option value="">Sort by</option>
                 <option value="-createdAt">Recent</option>
@@ -117,8 +117,8 @@ export default function ProductHome() {
 
             <div className="sm:ml-4">
               <select
-                onChange={(e) => setCategoryFilter(e.target.value)}
                 className="border rounded-md p-2"
+                onChange={(e) => setCategoryFilter(e.target.value)}
               >
                 <option value="">Category</option>
                 {Category?.data?.map((category: any) => (
@@ -132,9 +132,9 @@ export default function ProductHome() {
           
           <div className="sm:ml-4 flex justify-between mt-4 md:mt-0">
               <input
-                type="number"
-                placeholder="Min Price"
                 className="border rounded-md p-2 w-2/4 mr-3"
+                placeholder="Min Price"
+                type="number"
                 onChange={(e) =>
                   setMinPrice(
                     e.target.value ? parseFloat(e.target.value) : null
@@ -142,9 +142,9 @@ export default function ProductHome() {
                 }
               />
               <input
-                type="number"
-                placeholder="Max Price"
                 className="border rounded-md p-2 w-2/4"
+                placeholder="Max Price"
+                type="number"
                 onChange={(e) =>
                   setMaxPrice(
                     e.target.value ? parseFloat(e.target.value) : null

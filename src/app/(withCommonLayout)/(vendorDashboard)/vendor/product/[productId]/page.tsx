@@ -27,7 +27,7 @@ export default function UpdateProductPage({
 }: {
   params: Promise<Params>;
 }) {
-  const { productId } = use(params); // Unwrap `params` using React.use()
+  const { productId } = use(params); 
   const router = useRouter();
   const [imageFiles, setImageFiles] = useState<File | null>(null);
 
