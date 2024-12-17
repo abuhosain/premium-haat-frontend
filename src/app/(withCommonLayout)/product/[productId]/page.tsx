@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { useGetSingleProduct } from "@/src/hooks/product.hooks";
-import React, { use } from "react";
 import { Disclosure } from "@headlessui/react";
+import React, { use, useState } from "react";
+import { toast } from "sonner"; // Import sonner for notifications
 
 interface Params {
   productId: string;
@@ -11,6 +12,8 @@ interface Params {
 const ProductDetailsPage = ({ params }: { params: Promise<Params> }) => {
   const { productId } = use(params);
   const { data: product, isLoading } = useGetSingleProduct(productId);
+
+  const [cart, setCart] = useState<any[]>(JSON.parse(localStorage.getItem("cart") || "[]"));
 
   if (isLoading) return <div className="text-center py-12">Loading...</div>;
 
@@ -25,14 +28,38 @@ const ProductDetailsPage = ({ params }: { params: Promise<Params> }) => {
     discount,
     category,
     vendor,
-    review,
+    id,
   } = product?.data;
 
   // Calculate discounted price
   const discountedPrice = discount ? price - (price * discount) / 100 : price;
 
-  // Calculate the discount percentage display (if available)
-  const discountPercentage = discount ? `${discount}% Off` : null;
+  // Check if the product is already in the cart
+  const isProductInCart = cart.some((item: any) => item.productId === id);
+  const currentVendorId = cart[0]?.vendorId; // Assuming vendorId is the same for all items in the cart
+
+  // Handle adding or removing products from the cart
+  const handleAddToCart = () => {
+    if (isProductInCart) {
+      // Remove product from cart if already exists
+      const updatedCart = cart.filter((item: any) => item.productId !== id);
+      setCart(updatedCart); // Update local state
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      toast.success("Product removed from cart!");
+    } else {
+      // Check if the vendor ID is the same for all items in the cart
+      if (cart.length > 0 && currentVendorId !== vendor?.id) {
+        toast.error("Only delivered by the same vendor!");
+      } else {
+        // Add the product to the cart if no issue with the vendor
+        const newProduct = { productId: id, vendorId: vendor?.id };
+        const updatedCart = [...cart, newProduct];
+        setCart(updatedCart); // Update local state
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        toast.success("Product added to cart!");
+      }
+    }
+  };
 
   return (
     <div className="max-w-screen-xl mx-auto p-6">
@@ -51,7 +78,7 @@ const ProductDetailsPage = ({ params }: { params: Promise<Params> }) => {
           {/* Title and Category */}
           <h1 className="text-4xl font-bold text-gray-800 dark:text-white">{title}</h1>
           <div className="flex items-center space-x-4 mb-4">
-            <span className="px-3 py-1 text-sm font-semibold text-white  bg-primary-500 rounded-lg">
+            <span className="px-3 py-1 text-sm font-semibold text-white bg-primary-500 rounded-lg">
               {category?.name}
             </span>
           </div>
@@ -75,23 +102,26 @@ const ProductDetailsPage = ({ params }: { params: Promise<Params> }) => {
                 ${price.toFixed(2)}
               </span>
             )}
-            {discountPercentage && (
-              <span className="text-lg text-green-500 font-semibold">{discountPercentage}</span>
+            {discount && (
+              <span className="text-lg text-green-500 font-semibold">{discount}% Off</span>
             )}
           </div>
 
           {/* Add to Cart Button */}
           <div className="mt-8">
-            <button className="w-full py-3 bg-primary-500 text-white text-xl font-semibold rounded-lg shadow-md hover:bg-primary-600 transition duration-300">
-              Add to Cart
+            <button
+              className="w-full py-3 bg-primary-500 text-white text-xl font-semibold rounded-lg shadow-md hover:bg-primary-600 transition duration-300"
+              onClick={handleAddToCart}
+            >
+              {isProductInCart ? "Remove from Cart" : "Add to Cart"}
             </button>
           </div>
 
           {/* Reviews Section */}
           <div className="mt-8">
             <h3 className="text-xl font-semibold text-gray-800 dark:text-white">Customer Reviews</h3>
-            {review.length > 0 ? (
-              review.map((rev: any, index: number) => (
+            {product?.data.review.length > 0 ? (
+              product?.data.review.map((rev: any, index: number) => (
                 <div key={index} className="mt-4 p-4 border rounded-lg shadow-sm hover:bg-gray-50 dark:hover:bg-indigo-400 transition duration-200">
                   <div className="flex items-center space-x-3">
                     <span className="text-yellow-500">{"⭐".repeat(rev.rating)}</span>
