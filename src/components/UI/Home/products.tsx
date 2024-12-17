@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@nextui-org/react";
 import { SearchIcon } from "lucide-react";
@@ -29,21 +29,40 @@ export default function ProductHome() {
   const [categoryFilter, setCategoryFilter] = useState<string>("");
   const [minPrice, setMinPrice] = useState<number | null>(null);
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
+  const [totalPage, setTotalPage] = useState<number | undefined>();
+
+  // Generate query parameters for filtering products
+  const queryParams = useMemo(() => {
+    const query : Record<string, any> = {
+      searchTerm: searchTerm,
+      minPrice: minPrice || 0,   
+      maxPrice: maxPrice || 1000000,   
+      selectedSort,
+      page: page,
+    };
+    if (categoryFilter) {
+      query.categoryId  = categoryFilter;
+    }
+
+    const filteredQuery = Object.fromEntries(
+      Object.entries(query).filter(([_, value]) => value !== null && value !== "")
+    );
+    const params = new URLSearchParams(filteredQuery);
+
+    return `/product?${params.toString()}`;
+  }, [searchTerm, categoryFilter, minPrice, maxPrice, selectedSort, page]);
 
   const fetchData = async () => {
     if (loading) return;
     setLoading(true);
 
-    let queryParams = `page=${page}&limit=4`;
-    if (searchTerm) queryParams += `&searchTerm=${searchTerm}`;
-    if (categoryFilter) queryParams += `&category=${categoryFilter}`;
-    if (minPrice !== null) queryParams += `&minPrice=${minPrice}`;
-    if (maxPrice !== null) queryParams += `&maxPrice=${maxPrice}`;
-    if (selectedSort) queryParams += `&sort=${selectedSort}`;
-
     try {
-      const response = await axiosClient.get(`/product?${queryParams}`);
+      const response = await axiosClient.get(queryParams);
       const FeedData = response?.data?.data;
+      // console.log("Total Pages: ", response?.data?.data?.meta?.totalPages); // Log total pages to check
+
+      setTotalPage(response?.data?.data?.meta?.totalPages);
+
       if (page === 1) {
         setItems(FeedData?.data);
       } else {
@@ -67,24 +86,31 @@ export default function ProductHome() {
     fetchData();
   }, [page, searchTerm, selectedSort, categoryFilter, minPrice, maxPrice]);
 
-  const handleInfiniteScroll = () => {
+  const handleScroll = () => {
+    // console.log("Scroll position:", window.innerHeight + document.documentElement.scrollTop);
+    // console.log("Total height:", document.documentElement.scrollHeight);
     if (
       window.innerHeight + document.documentElement.scrollTop >=
       document.documentElement.scrollHeight - 1
     ) {
-      if (!loading) setPage((prev) => prev + 1);
+      
+      if (!loading) {
+        if (totalPage && totalPage > page) {
+          setPage((prev) => prev + 1);
+        }
+      }
     }
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleInfiniteScroll);
-    return () => window.removeEventListener("scroll", handleInfiniteScroll);
-  }, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [page, loading, totalPage]);
 
   return (
     <Container>
       {/* Header */}
-      <div className="mb-8 p-6 bg-white dark:bg-black  shadow-lg rounded-lg sticky top-0 z-20 border border-gray-200">
+      <div className="mb-8 p-6 bg-white dark:bg-black shadow-lg rounded-lg sticky top-0 z-20 border border-gray-200">
         <div className="flex flex-col sm:flex-row justify-between items-center">
           <form>
             <Input
@@ -102,7 +128,6 @@ export default function ProductHome() {
             />
           </form>
           <div className="flex items-center w-full sm:w-auto mt-4 sm:mt-0">
-
             <div className="sm:ml-4">
               <select
                 className="border rounded-md p-2 mr-2"
@@ -129,29 +154,25 @@ export default function ProductHome() {
               </select>
             </div>
           </div>
-          
+
           <div className="sm:ml-4 flex justify-between mt-4 md:mt-0">
-              <input
-                className="border rounded-md p-2 w-2/4 mr-3"
-                placeholder="Min Price"
-                type="number"
-                onChange={(e) =>
-                  setMinPrice(
-                    e.target.value ? parseFloat(e.target.value) : null
-                  )
-                }
-              />
-              <input
-                className="border rounded-md p-2 w-2/4"
-                placeholder="Max Price"
-                type="number"
-                onChange={(e) =>
-                  setMaxPrice(
-                    e.target.value ? parseFloat(e.target.value) : null
-                  )
-                }
-              />
-            </div>
+            <input
+              className="border rounded-md p-2 w-2/4 mr-3"
+              placeholder="Min Price"
+              type="number"
+              onChange={(e) =>
+                setMinPrice(e.target.value ? parseFloat(e.target.value) : null)
+              }
+            />
+            <input
+              className="border rounded-md p-2 w-2/4"
+              placeholder="Max Price"
+              type="number"
+              onChange={(e) =>
+                setMaxPrice(e.target.value ? parseFloat(e.target.value) : null)
+              }
+            />
+          </div>
         </div>
       </div>
 
