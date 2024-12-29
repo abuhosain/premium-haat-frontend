@@ -21,7 +21,6 @@ export default function ProductHome() {
   const { data: Category } = useGetAllCateogry();
   const { register, watch } = useForm();
   const searchTerm = useDebounce(watch("search"), 500);
-
   const [items, setItems] = useState<IProduct[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -45,7 +44,7 @@ export default function ProductHome() {
     }
 
     const filteredQuery = Object.fromEntries(
-      Object.entries(query).filter(([_, value]) => value !== null && value !== "")
+      Object.entries(query).filter(([_, value]) => value !== null && value !== "" && value !==undefined)
     );
     const params = new URLSearchParams(filteredQuery);
 

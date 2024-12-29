@@ -6,6 +6,7 @@ import PHInput from "@/src/components/form/PHInput";
 import { useOrderProdcut } from "@/src/hooks/order.hook";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import envConfig from "@/src/config/env.confg";
 
 interface CartItem {
   productId: string;
@@ -52,7 +53,7 @@ const CheckoutPage = () => {
       const productIds = cartItems.map((item) => item.productId);
       try {
         const response = await fetch(
-          "http://localhost:5000/api/v1/product/multiple",
+          `${envConfig.baseApi}/product/multiple`,
           {
             method: "POST",
             headers: {
@@ -96,17 +97,25 @@ const CheckoutPage = () => {
       toast.error("Your cart is empty. Cannot place order.");
       return;
     }
-    const vendorId = cartItems[0].vendorId;   
+  
+    const vendorId = cartItems[0].vendorId;
+  
+    // Prepare order details with customer info included
     const orderDetails = {
       vendorId,
-      customerInfo,
-      cartItems,
       totalPrice,
-      couponDiscount,
+      orderItems: cartItems.map((item) => ({
+        productId: item.productId,
+        quantity: item.quantity,
+        price: products.find((p) => p.id === item.productId)?.price || 0,
+      })),
+      customerInfo, // Include customer information
       paymentMethod,
     };
-    console.log(orderDetails)
-    // Pass the orderDetails directly
+  
+    console.log("Order Details:", orderDetails);
+  
+    // Trigger mutation to send data to backend
     handleCreateOrder(orderDetails);
   };
   
@@ -115,7 +124,8 @@ const CheckoutPage = () => {
     if (data && !data?.success) toast.error(data?.message as string);
     if (isSuccess && data?.success) {
       toast.success("Order created successfully");
-      router.push("/");
+      window.location.href = data?.data?.payment_url;
+     console.log(data)
     }
   }, [data, isSuccess, router]);
 

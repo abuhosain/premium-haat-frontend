@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import envConfig from "@/src/config/env.confg";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { toast } from "sonner"; // For notifications
@@ -43,7 +44,7 @@ const CartPage = () => {
       const productIds = cartItems.map((item) => item.productId);
       try {
         const response = await fetch(
-          "http://localhost:5000/api/v1/product/multiple",
+          `${envConfig.baseApi}/product/multiple`,
           {
             method: "POST",
             headers: {

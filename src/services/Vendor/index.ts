@@ -24,6 +24,16 @@ export const getAllProdutByVendor = async () => {
   return data;
 };
 
+export const getAllProdutByVendorId = async (id: string) => {
+  const { data } = await axiosInstance.get(`/vendor/product/${id}`);
+  return data;
+};
+
+export const getAllVendorByVendorId = async (id: string) => {
+  const { data } = await axiosInstance.get(`/vendor/vendor/${id}`);
+  return data;
+};
+
 export const updateVendor = async (updatedData: FieldValues) => {
   try {
     const { data } = await axiosInstance.put("/vendor/update", updatedData);

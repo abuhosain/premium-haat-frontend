@@ -2,6 +2,7 @@
 "use client";
 import { useGetSingleProduct } from "@/src/hooks/product.hooks";
 import { Disclosure } from "@headlessui/react";
+import Link from "next/link";
 import React, { use, useState } from "react";
 import { toast } from "sonner"; // Import sonner for notifications
 
@@ -23,6 +24,7 @@ const ProductDetailsPage = ({ params }: { params: Promise<Params> }) => {
   const {
     title,
     img,
+    quantity,
     description,
     price,
     discount,
@@ -30,7 +32,7 @@ const ProductDetailsPage = ({ params }: { params: Promise<Params> }) => {
     vendor,
     id,
   } = product?.data;
-
+// console.log(product?.data)
   // Calculate discounted price
   const discountedPrice = discount ? price - (price * discount) / 100 : price;
 
@@ -86,14 +88,20 @@ const ProductDetailsPage = ({ params }: { params: Promise<Params> }) => {
               {category?.name}
             </span>
           </div>
+          <div className="flex items-center space-x-4 mb-4">
+          Quantity : 
+            <span className="px-3 py-1 text-sm font-semibold  rounded-lg">
+            {quantity}
+            </span>
+          </div>
 
           {/* Product Description */}
           <p className="text-base text-gray-700 dark:text-white mb-6">{description}</p>
 
           {/* Vendor Information */}
           <div className="border-t border-gray-300 pt-6">
-            <h2 className="text-xl font-semibold text-gray-800 dark:text-white">Vendor Information</h2>
-            <p className="text-gray-700 dark:text-white">Name: {vendor?.name}</p>
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-white ">Vendor Information</h2>
+            <Link href={`/profile/${product?.data?.vendorId}`}><p className="text-gray-700 dark:text-white ">Name: <span className="underline cursor-pointer" >{vendor?.name}</span> </p></Link>
           </div>
 
           {/* Price & Discount */}

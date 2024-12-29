@@ -1,10 +1,10 @@
 "use server";
 
 import axiosInstance from "@/src/lib/AxiousInstance";
- 
-export const orderProduct = async (userData: any) => {
+
+export const addFollowUnfollow = async (vendorId: string): Promise<any> => {
   try {
-    const { data } = await axiosInstance.post("/order/confirmation", userData);
+    const { data } = await axiosInstance.post(`/follow/${vendorId}`);
     return data;
   } catch (error: any) {
     const data = {

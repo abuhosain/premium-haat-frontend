@@ -1,6 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   getAllProdutByVendor,
+  getAllProdutByVendorId,
+  getAllVendorByVendorId,
   getVendor,
   updateVendor,
 } from "../services/Vendor";
@@ -18,6 +20,19 @@ export const useGetAllProductByVendor = () => {
   return useQuery<any, Error, any, string[]>({
     queryKey: ["GET_ALL_PRODUCT_BY_VENDOR"],
     queryFn: async () => await getAllProdutByVendor(),
+  });
+};
+
+export const useGetAllProductsByVendorId = (vendorId: string) => {
+  return useQuery<any, Error, any, string[]>({
+    queryKey: ["GET_ALL_PRODUCT_BY_VENDOR_ID"],
+    queryFn: async () => await getAllProdutByVendorId(vendorId),
+  });
+};
+export const useGetVendorByVendorId = (vendorId: string) => {
+  return useQuery<any, Error, any, string[]>({
+    queryKey: ["GET_VENDOR_BY_VENDOR"],
+    queryFn: async () => await getAllVendorByVendorId(vendorId),
   });
 };
 

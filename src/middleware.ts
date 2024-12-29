@@ -4,7 +4,14 @@ import { getCurrentUser } from "./services/Auth";
 
 // Define authentication and protected routes
 const AuthRoutes = ["/login", "/register"];
-const protectedRoutes = ["/profile", "/profile/:page*"];
+const protectedRoutes = [
+  "/profile",
+  "/profile/:page*",
+  "/product",
+  "/product/:page",
+  "/admin",
+  "/cart"
+];
 
 type Role = keyof typeof roleBasedRoutes;
 
@@ -65,5 +72,8 @@ export const config = {
     "/admin/:page*",
     "/profile",
     "/profile/:page*",
+    "/product",
+    "/product/:page",
+    "/cart"
   ],
 };

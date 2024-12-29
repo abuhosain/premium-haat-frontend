@@ -11,18 +11,18 @@ const ProductCard = ({ product }: { product: any }) => {
       {/* Vendor Name and Logo */}
       <div className="flex items-center p-3 border-b">
         <Image
-          alt={product.vendor.name || "Vendor Logo"}
+          alt={product?.vendor?.name || "Vendor Logo"}
           className="rounded-full"
           height={40}
-          src={product.vendor.logo}
+          src={product?.vendor?.logo}
           width={40}
         />
 
         <Link
           className="ml-3 text-lg font-medium dark:text-white text-gray-700 hover:underline"
-          href={`/vendor/${product.vendorId}`}
+          href={`/profile/${product.vendorId}`}
         >
-          {product.vendor.name || "Vendor"}
+          {product?.vendor?.name || "Vendor"}
         </Link>
       </div>
 
