@@ -1,7 +1,11 @@
+import HeroSection from "@/src/components/UI/Home/Hero";
+
  
 
 export default async function Home() {
   return (
-    <p>HEllo</p>
+   <div>
+    <HeroSection />
+   </div>
   )
 }

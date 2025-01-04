@@ -45,7 +45,7 @@ const Footer = () => {
               Quick Links
             </motion.h3>
             <ul className="space-y-3">
-              {["Products", "Categories", "About Us", "Contact"].map((item, index) => (
+              {["Product", "Categories", "About Us", "Contact"].map((item, index) => (
                 <motion.li 
                   key={item}
                   animate={{ opacity: 1, x: 0 }}
