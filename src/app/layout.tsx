@@ -6,8 +6,7 @@ import { siteConfig } from "@/src/config/site";
 import { fontSans } from "@/src/config/fonts";
 import { Navbar } from "@/src/components/navbar";
 import { Providers } from "../lib/Providers";
-import Footer from "../components/UI/Home/Footer";
-
+ 
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -43,10 +42,10 @@ export default function RootLayout({
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
-            <main className="container mx-auto max-w-7xl   px-6 flex-grow">
+            <main className="">
               {children}
             </main>
-            <Footer />
+            
           </div>
         </Providers>
       </body>
