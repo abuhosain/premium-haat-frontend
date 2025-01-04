@@ -12,6 +12,10 @@ export const siteConfig = {
       label: "Cart",
       href: "/cart",
     },
+    {
+      label: "All Product",
+      href: "/product",
+    },
   ],
   navMenuItems: [
     {
@@ -21,6 +25,10 @@ export const siteConfig = {
     {
       label: "Cart",
       href: "/cart",
+    },
+    {
+      label: "All Product",
+      href: "/product",
     },
   ]
 };

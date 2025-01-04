@@ -28,7 +28,7 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-           <Image alt="Premiumm" height={70} src="/premium.png" width={70} />
+            <Image alt="Premiumm" height={70} src="/premium.png" width={70} />
             {/* <p className="font-bold text-inherit">ACME</p> */}
           </NextLink>
         </NavbarBrand>
@@ -70,6 +70,15 @@ export const Navbar = () => {
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <ThemeSwitch />
+        {user?.email ? (
+          <NavbarItem className="flex gap-1">
+            <NavbarDropdown />
+          </NavbarItem>
+        ) : (
+          <NavbarItem className="flex gap-1">
+            <Link href="/login">Login</Link>
+          </NavbarItem>
+        )}
         <NavbarMenuToggle />
       </NavbarContent>
 

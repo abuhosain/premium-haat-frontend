@@ -32,19 +32,21 @@ export default function ProductHome() {
 
   // Generate query parameters for filtering products
   const queryParams = useMemo(() => {
-    const query : Record<string, any> = {
+    const query: Record<string, any> = {
       searchTerm: searchTerm,
-      minPrice: minPrice || 0,   
-      maxPrice: maxPrice || 1000000,   
+      minPrice: minPrice || 0,
+      maxPrice: maxPrice || 1000000,
       selectedSort,
       page: page,
     };
     if (categoryFilter) {
-      query.categoryId  = categoryFilter;
+      query.categoryId = categoryFilter;
     }
 
     const filteredQuery = Object.fromEntries(
-      Object.entries(query).filter(([_, value]) => value !== null && value !== "" && value !==undefined)
+      Object.entries(query).filter(
+        ([_, value]) => value !== null && value !== "" && value !== undefined
+      )
     );
     const params = new URLSearchParams(filteredQuery);
 
@@ -92,7 +94,6 @@ export default function ProductHome() {
       window.innerHeight + document.documentElement.scrollTop >=
       document.documentElement.scrollHeight - 1
     ) {
-      
       if (!loading) {
         if (totalPage && totalPage > page) {
           setPage((prev) => prev + 1);
@@ -109,7 +110,7 @@ export default function ProductHome() {
   return (
     <Container>
       {/* Header */}
-      <div className="mb-8 p-6 bg-white dark:bg-black shadow-lg rounded-lg sticky top-0 z-20 border border-gray-200">
+      <div className="mb-8 p-6 bg-white dark:bg-black shadow-lg rounded-b-lg-lg sticky top-0 z-20 border border-gray-200">
         <div className="flex flex-col sm:flex-row justify-between items-center">
           <form>
             <Input
