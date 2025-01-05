@@ -25,7 +25,7 @@ const CategorySlider = () => {
   if (isLoading) return <div className="flex justify-center items-center h-[20vh] "> <Spinner size="lg" /></div>;
   return (
     <div className="relative px-4 py-8">
-      <h2 className="text-2xl font-bold mb-10 text-center text-gray-800">
+      <h2 className="text-2xl dark:text-white font-bold mb-10 text-center text-gray-800">
         All Category
       </h2>
       <Swiper
@@ -68,7 +68,7 @@ const CategorySlider = () => {
                 src={c.icon}
               />
             </div>
-            <p className="text-sm font-medium ml-7   text-gray-700">{c.name}</p>
+            <p className="text-sm font-medium ml-7 dark:text-white  text-gray-700">{c.name}</p>
           </SwiperSlide>
         ))}
       </Swiper>

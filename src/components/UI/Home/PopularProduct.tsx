@@ -20,7 +20,7 @@ const PopularProduct = () => {
   return (
     <div className="px-4 pb-8 ">
       {/* Section Title */}
-      <h3 className="text-3xl font-bold text-center text-gray-800 mb-8">
+      <h3 className="text-3xl font-bold text-center dark:text-white text-gray-800 mb-8">
         Popular Products
       </h3>
 
