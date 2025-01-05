@@ -20,8 +20,8 @@ const brands = [
 
 const BrandSection: React.FC = () => {
   return (
-    <section className="py-12 bg-gradient-to-r from-blue-50 via-white to-blue-50">
-      <div className="container mx-auto px-12 text-center">
+    <section className="py-12 bg-gradient-to-r from-blue-50 via-white to-blue-50 rounded-b-full">
+      <div className="container mx-auto px-6 md:px-12 text-center">
         <h2 className="text-4xl font-extrabold text-gray-800 mb-4">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
             Our Trusted Partners
@@ -36,24 +36,24 @@ const BrandSection: React.FC = () => {
             disableOnInteraction: false,
           }}
           breakpoints={{
-            640: { slidesPerView: 2 },
-            768: { slidesPerView: 3 },
-            1024: { slidesPerView: 5 },
+            640: { slidesPerView: 1, spaceBetween: 10 },
+            768: { slidesPerView: 2, spaceBetween: 20 },
+            1024: { slidesPerView: 5, spaceBetween: 30 },
           }}
+          className="swiper-container"
           loop={true}
           modules={[Autoplay]}
           slidesPerView={1}
           spaceBetween={20}
-          className="swiper-container"
         >
           {brands.map((brand, index) => (
             <SwiperSlide key={index}>
               <Card
                 isHoverable
                 isPressable
-                className="shadow-lg transform hover:scale-105 transition-transform rounded-lg p-4 bg-white"
+                className="shadow-lg border transform hover:scale-105 transition-transform rounded-lg p-4 bg-white mx-auto w-40 md:w-auto"
               >
-                <div className="flex justify-center w-32 items-center h-32">
+                <div className="flex justify-center items-center w-32 h-32 mx-auto">
                   <Image
                     alt={brand.name}
                     className="rounded-full"
@@ -62,7 +62,6 @@ const BrandSection: React.FC = () => {
                     width={80}
                   />
                 </div>
-                
               </Card>
             </SwiperSlide>
           ))}
