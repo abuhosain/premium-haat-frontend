@@ -5,6 +5,7 @@ import RelatedProduct from "@/src/components/UI/Home/Related";
 import { useGetSingleProduct } from "@/src/hooks/product.hooks";
  
 import { Disclosure } from "@headlessui/react";
+import { Spinner } from "@nextui-org/react";
 import Link from "next/link";
 import React, { use, useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -27,7 +28,7 @@ const ProductDetailsPage = ({ params }: { params: Promise<Params> }) => {
     }
   }, []);
 
-  if (isLoading) return <div className="text-center py-12">Loading...</div>;
+  if (isLoading) return <div className="flex justify-center items-center h-[60vh] "> <Spinner size="lg" /></div>;
   if (!product)
     return <div className="text-center py-12">Product not found!</div>;
 
