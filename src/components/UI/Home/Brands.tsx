@@ -20,45 +20,49 @@ const brands = [
 
 const BrandSection: React.FC = () => {
   return (
-    <section className="py-12 bg-gray-50 rounded-b-full">
-      <div className="container mx-auto px-12">
-        <h2 className="text-3xl font-bold text-center mb-8">Our Trusted Partners</h2>
+    <section className="py-12 bg-gradient-to-r from-blue-50 via-white to-blue-50">
+      <div className="container mx-auto px-12 text-center">
+        <h2 className="text-4xl font-extrabold text-gray-800 mb-4">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+            Our Trusted Partners
+          </span>
+        </h2>
+        <p className="text-gray-600 mb-10 text-lg">
+          These are the brands we proudly collaborate with.
+        </p>
         <Swiper
           autoplay={{
-            delay: 2500,
+            delay: 3000,
             disableOnInteraction: false,
           }}
           breakpoints={{
-            640: {
-              slidesPerView: 3,
-            },
-            768: {
-              slidesPerView: 4,
-            },
-            1024: {
-              slidesPerView: 5,
-            },
+            640: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 5 },
           }}
           loop={true}
           modules={[Autoplay]}
-          slidesPerView={2}
-          spaceBetween={30}
-          className='bg-white'
+          slidesPerView={1}
+          spaceBetween={20}
+          className="swiper-container"
         >
           {brands.map((brand, index) => (
             <SwiperSlide key={index}>
               <Card
                 isHoverable
                 isPressable
-                className="flex bg-white items-center justify-center   h-32 w-full"
+                className="shadow-lg transform hover:scale-105 transition-transform rounded-lg p-4 bg-white"
               >
-                <Image
-                  alt={brand.name}
-                  className="object-contain rounded-full max-h-full max-w-full  "
-                  height={100}
-                  src={brand.logo}
-                  width={100}
-                />
+                <div className="flex justify-center w-32 items-center h-32">
+                  <Image
+                    alt={brand.name}
+                    className="rounded-full"
+                    height={80}
+                    src={brand.logo}
+                    width={80}
+                  />
+                </div>
+                
               </Card>
             </SwiperSlide>
           ))}
@@ -69,4 +73,3 @@ const BrandSection: React.FC = () => {
 }
 
 export default BrandSection
-
