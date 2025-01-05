@@ -42,9 +42,10 @@ const ProductCard = ({ product }: { product: any }) => {
         <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
           {product.title || "Product Name"}
         </h5>
-        <p className="mb-3 font-normal text-gray-700 dark:text-white">
+        <p className="mb-3 font-normal text-gray-700 dark:text-white h-16   text-ellipsis line-clamp-4">
           {product.description || "No description available."}
         </p>
+
         <p className="mb-3 text-lg font-semibold text-blue-700 dark:text-white">
           ${product.price?.toFixed(2) || "N/A"}
         </p>

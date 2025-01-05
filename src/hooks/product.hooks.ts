@@ -3,6 +3,7 @@ import { FieldValues } from "react-hook-form";
 import {
   createProduct,
   deleteProduct,
+  getAllProduts,
   getSingleProductById,
   updateProduct,
 } from "../services/Products";
@@ -19,6 +20,13 @@ export const useGetSingleProduct = (productId: string) => {
   return useQuery<any, Error, any, string[]>({
     queryKey: ["GET_SINGLE_PRODUCT"],
     queryFn: async () => await getSingleProductById(productId),
+  });
+};
+
+export const useGetAllProducts = () => {
+  return useQuery<any, Error, any, string[]>({
+    queryKey: ["GET_ALL_PRODUCTS"],
+    queryFn: async () => await getAllProduts(),
   });
 };
 
