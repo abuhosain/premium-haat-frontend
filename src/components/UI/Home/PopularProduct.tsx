@@ -11,12 +11,14 @@ import "swiper/css/pagination";
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
 import { useGetAllProducts } from "@/src/hooks/product.hooks";
 import ProductCard from "../Cared/ProductCard";
+import { Spinner } from "@nextui-org/react";
 
 const PopularProduct = () => {
-  const { data: products } = useGetAllProducts();
+  const { data: products, isLoading } = useGetAllProducts();
 
+  if (isLoading) return <div className="flex justify-center items-center h-[20vh] "> <Spinner size="lg" /></div>;
   return (
-    <div className="px-4 py-8 ">
+    <div className="px-4 pb-8 ">
       {/* Section Title */}
       <h3 className="text-3xl font-bold text-center text-gray-800 mb-8">
         Popular Products

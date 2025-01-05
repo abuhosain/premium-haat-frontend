@@ -10,9 +10,10 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { useGetAllCateogry } from "@/src/hooks/category.hooks";
+import { Spinner } from "@nextui-org/react";
 
 const CategorySlider = () => {
-  const { data, isPending } = useGetAllCateogry();
+  const { data, isLoading } = useGetAllCateogry();
   const [category, setCategory] = useState<any[]>([]);
 
   useEffect(() => {
@@ -21,6 +22,7 @@ const CategorySlider = () => {
     }
   }, [data]);
 
+  if (isLoading) return <div className="flex justify-center items-center h-[20vh] "> <Spinner size="lg" /></div>;
   return (
     <div className="relative px-4 py-8">
       <h2 className="text-2xl font-bold mb-10 text-center text-gray-800">
