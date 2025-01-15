@@ -1,8 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { ReactNode } from "react";
 import {
   FaHome,
   FaPlusCircle,
@@ -10,91 +7,95 @@ import {
   FaBook,
   FaBars,
   FaTimes,
-  FaClipboardList, // Importing new icon for "My Order"
+  FaClipboardList,
 } from "react-icons/fa";
 
-const CustomerDashboardLayout = ({ children }: { children: ReactNode }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+import { useState } from "react";
+import Link from "next/link";
+import { ReactNode } from "react";
+
+const VendorDashboardLayout = ({ children }: { children: ReactNode }) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
-  return (
-    <div className="min-h-screen flex">
-      {/* Side Navigation Bar */}
-      <aside
-        className={`${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } fixed inset-y-0 z-30 left-0 bg-white shadow-lg w-64 lg:translate-x-0 transition-transform duration-300`}
-      >
-        <div className="h-full flex flex-col justify-between p-6 lg:p-8">
-          <div>
-            {/* Logo or Dashboard Title */}
-            <div className="mb-12 flex items-center">
-              <FaHome className="h-8 w-8 text-blue-500" />
-              <span className="ml-2 text-3xl lg:text-4xl font-bold text-gray-800 hidden lg:block">
-                Dashboard
-              </span>
-            </div>
-            {/* Navigation Links */}
-            <nav className="space-y-8 lg:space-y-12">
-              <Link href="/vendor">
-                <p className="flex mt-3 items-center text-gray-700 hover:text-blue-500 transition-colors duration-200 text-lg lg:text-xl">
-                  <FaHome className="h-6 w-6 lg:h-7 lg:w-7" />
-                  <span className="ml-3 hidden lg:block">Dashboard</span>
-                </p>
-              </Link>
+  const navLinks = [
+    { href: "/vendor", label: "Dashboard", icon: <FaHome /> },
+    {
+      href: "/vendor/create-product",
+      label: "Create Product",
+      icon: <FaPlusCircle />,
+    },
+    {
+      href: "/vendor/edit-profile",
+      label: "Update Vendor",
+      icon: <FaUserEdit />,
+    },
+    { href: "/vendor/product", label: "My Products", icon: <FaBook /> },
+    { href: "/vendor/order", label: "Orders", icon: <FaClipboardList /> },
+  ];
 
-              <Link href="/vendor/create-product">
-                <p className="flex mt-3 items-center text-gray-700 hover:text-blue-500 transition-colors duration-200 text-lg lg:text-xl">
-                  <FaPlusCircle className="h-6 w-6 lg:h-7 lg:w-7" />
-                  <span className="ml-3 hidden lg:block">Create Product</span>
-                </p>
-              </Link>
-              <Link href="/vendor/edit-profile">
-                <p className="flex mt-3 items-center text-gray-700 hover:text-blue-500 transition-colors duration-200 text-lg lg:text-xl">
-                  <FaUserEdit className="h-6 w-6 lg:h-7 lg:w-7" />
-                  <span className="ml-3 hidden lg:block">Update Vendor</span>
-                </p>
-              </Link>
-              <Link href="/vendor/product">
-                <p className="flex mt-3 items-center text-gray-700 hover:text-blue-500 transition-colors duration-200 text-lg lg:text-xl">
-                  <FaBook className="h-6 w-6 lg:h-7 lg:w-7" />
-                  <span className="ml-3 hidden lg:block">My Products</span>
-                </p>
-              </Link>
-              {/* My Order Link */}
-              <Link href="/vendor/order">
-                <p className="flex mt-3 items-center text-gray-700 hover:text-blue-500 transition-colors duration-200 text-lg lg:text-xl">
-                  <FaClipboardList className="h-6 w-6 lg:h-7 lg:w-7" />
-                  <span className="ml-3 hidden lg:block">Orders</span>
-                </p>
-              </Link>
+  return (
+    <div className="flex h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+      {/* Sidebar */}
+      <aside
+        className={`fixed inset-y-0 left-0 z-50 w-64 transform bg-white dark:bg-gray-800 shadow-lg transition-transform duration-300 ease-in-out ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:translate-x-0`}
+      >
+        <div className="h-full flex flex-col justify-between">
+          <div className="p-6">
+            <h2 className="text-2xl font-bold mb-8 text-center text-blue-600 dark:text-blue-400">
+              Vendor Panel
+            </h2>
+            <nav className="space-y-6">
+              {navLinks.map((link, index) => (
+                <Link key={index} href={link.href}>
+                  <p className="flex items-center px-4 py-3 rounded-lg hover:bg-blue-100 dark:hover:bg-gray-700 transition">
+                    <span className="text-xl">{link.icon}</span>
+                    <span className="ml-4 font-medium">{link.label}</span>
+                  </p>
+                </Link>
+              ))}
             </nav>
           </div>
+
+          {/* Close Button (Mobile) */}
+          <button
+            className="absolute top-4 right-4 lg:hidden"
+            onClick={toggleSidebar}
+          >
+            <FaTimes className="h-6 w-6 text-gray-500 dark:text-gray-400" />
+          </button>
         </div>
       </aside>
 
-      {/* Main Content Area */}
-      <div className="w-full flex flex-col lg:ml-64">
-        {/* Sidebar Toggle Button for Mobile */}
-        <div className="flex justify-between items-center bg-white p-4 shadow-lg lg:hidden z-50">
-          <button className="text-gray-700" onClick={toggleSidebar}>
-            {sidebarOpen ? (
-              <FaTimes className="h-8 w-8" />
-            ) : (
-              <FaBars className="h-8 w-8" />
-            )}
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col lg:ml-64">
+        {/* Header (Mobile) */}
+        <header className="lg:hidden flex items-center justify-between bg-white dark:bg-gray-800 px-6 py-4 shadow-md">
+          <h1 className="text-xl font-bold">Dashboard</h1>
+          <button onClick={toggleSidebar}>
+            <FaBars className="h-6 w-6 text-gray-600 dark:text-gray-300" />
           </button>
-          <h1 className="text-xl font-bold text-gray-800">Dashboard</h1>
-        </div>
+        </header>
 
-        {/* Main Content Section */}
-        <main className="flex-1 p-4 lg:p-8">{children}</main>
+        {/* Page Content */}
+        <main className="flex-1 p-6 overflow-y-auto">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            {children}
+          </div>
+        </main>
+
+        {/* Footer */}
+        <footer className="py-4 bg-white dark:bg-gray-800 text-center text-sm text-gray-500 dark:text-gray-400">
+          © {new Date().getFullYear()} Premium Haat. All rights reserved.
+        </footer>
       </div>
     </div>
   );
 };
 
-export default CustomerDashboardLayout;
+export default VendorDashboardLayout;
