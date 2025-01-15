@@ -6,6 +6,7 @@ import { siteConfig } from "@/src/config/site";
 import { fontSans } from "@/src/config/fonts";
 import { Navbar } from "@/src/components/navbar";
 import { Providers } from "../lib/Providers";
+import SubNav from "../components/SubNav";
  
 export const metadata: Metadata = {
   title: {
@@ -41,6 +42,7 @@ export default function RootLayout({
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
+            <SubNav />
             <Navbar />
             <main className="">
               {children}
