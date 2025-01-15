@@ -7,10 +7,7 @@ const AuthRoutes = ["/login", "/register"];
 const protectedRoutes = [
   "/profile",
   "/profile/:page*",
-  "/product",
-  "/product/:page",
   "/admin",
-  "/cart"
 ];
 
 type Role = keyof typeof roleBasedRoutes;
@@ -71,9 +68,6 @@ export const config = {
     "/customer/:page*",
     "/admin/:page*",
     "/profile",
-    "/profile/:page*",
-    "/product",
-    "/product/:page",
-    "/cart"
+     
   ],
 };
