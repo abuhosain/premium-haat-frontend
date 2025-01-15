@@ -7,13 +7,15 @@ import Testimonials from "@/src/components/UI/Home/Testimonial/Testimonials";
 
 export default async function Home() {
   return (
-    <div>
+    <div className="">
       <HeroSection />
-      <CategorySlider />
-      <PopularProduct />
-      <Testimonials />
-      <Map />
-      <BrandSection />
+      <div className="px-8">
+        <CategorySlider />
+        <PopularProduct />
+        <Testimonials />
+        <Map />
+        <BrandSection />
+      </div>
     </div>
   );
 }

@@ -103,14 +103,14 @@ const ProductCard = ({ product }: { product: Product }) => {
         <Image
           alt={product.title || "Product Image"}
           className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-          src={product.img || "/default-product.png"}
           layout="fill"
+          src={product.img || "/default-product.png"}
         />
         <div className="absolute top-2 right-2 flex flex-col gap-2">
           <button
-            onClick={handleToggleWishlist}
-            className="p-2 bg-white dark:bg-gray-800 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
             aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+            className="p-2 bg-white dark:bg-gray-800 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+            onClick={handleToggleWishlist}
           >
             <Heart className={`w-5 h-5 ${isWishlisted ? 'text-red-500 fill-current' : 'text-gray-600 dark:text-gray-300'}`} />
           </button>
@@ -140,8 +140,8 @@ const ProductCard = ({ product }: { product: Product }) => {
               View Details
             </Link>
             <button
-              onClick={handleAddToCart}
               className="flex-1 inline-flex justify-center items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 transition-colors duration-200 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-700"
+              onClick={handleAddToCart}
             >
               <ShoppingCart className="w-4 h-4 mr-2" />
               Add to Cart
