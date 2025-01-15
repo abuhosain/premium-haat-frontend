@@ -115,8 +115,8 @@ const UserTable = ({ user, isLoading, onDelete, onUpdate }: UserTableProps) => {
                   className={`${
                     status === "ACTIVE" ? "bg-yellow-500" : "bg-green-500"
                   } text-white font-medium py-2 px-4 rounded-md transition duration-200 ease-in-out hover:opacity-90 dark:bg-yellow-400 dark:hover:bg-green-500 ${isBlocking || isUnblocking ? "opacity-50 cursor-not-allowed" : ""}`}
-                  onClick={() => handleBlockToggle(id, status)}
                   disabled={isBlocking || isUnblocking} // Disable button while blocking/unblocking
+                  onClick={() => handleBlockToggle(id, status)}
                 >
                   {isBlocking || isUnblocking
                     ? "Processing..."
@@ -127,8 +127,8 @@ const UserTable = ({ user, isLoading, onDelete, onUpdate }: UserTableProps) => {
 
                 <button
                   className={`bg-red-500 text-white px-3 py-1 rounded-md transition hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 ${isDeleting ? "opacity-50 cursor-not-allowed" : ""}`}
-                  onClick={() => handleDelete(id)}
                   disabled={isDeleting} // Disable button while deleting
+                  onClick={() => handleDelete(id)}
                 >
                   {isDeleting ? "Deleting..." : "Delete"}
                 </button>

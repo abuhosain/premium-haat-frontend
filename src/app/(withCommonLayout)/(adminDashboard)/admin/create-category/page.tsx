@@ -88,8 +88,8 @@ export default function CreateCategoryPage() {
                 onChange={handleImageChange}
               />
               <label
-                htmlFor="image"
                 className="cursor-pointer rounded-lg bg-indigo-600 px-4 py-2 text-white shadow hover:bg-indigo-700"
+                htmlFor="image"
               >
                 Choose File
               </label>

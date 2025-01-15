@@ -82,9 +82,9 @@ export default function UpdateCategoryPage({
       </h3>
       <div className="w-full max-w-2xl rounded-lg bg-white p-8 shadow-md">
         <PHForm
+          defaultValues={singleCategory?.data} // Prefill form with category data
           resolver={zodResolver(createCategoryValidationSchema)}
           onSubmit={onSubmit}
-          defaultValues={singleCategory?.data} // Prefill form with category data
         >
           <div className="grid grid-cols-1 gap-6">
             <PHInput label="Category Name" name="name" size="sm" />

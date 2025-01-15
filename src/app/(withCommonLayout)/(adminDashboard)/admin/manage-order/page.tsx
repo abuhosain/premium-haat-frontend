@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { useGetVendor } from "@/src/hooks/vendor.hook";
 import { useGetAllOrder } from "@/src/hooks/admin.hook";
 
 const OrderPage = () => {

@@ -106,9 +106,9 @@ export default function UpdateProductPage({
       </h3>
       <div className="w-full max-w-2xl rounded-lg bg-white p-8 shadow-md">
         <PHForm
+          defaultValues={singleProduct?.data} // Prefill form with product data
           resolver={zodResolver(createProductValidationSchema)}
           onSubmit={onSubmit}
-          defaultValues={singleProduct?.data} // Prefill form with product data
         >
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <PHInput label="Title" name="title" size="sm" />

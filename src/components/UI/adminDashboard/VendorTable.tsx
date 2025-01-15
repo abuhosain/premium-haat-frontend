@@ -62,7 +62,7 @@ const VendroTable = ({ user, isLoading, onUpdate }: VendroTableProps) => {
         <tbody>
           <tr className="border-b border-gray-200 hover:bg-gray-100">
             <td className="py-4 px-6 text-center text-gray-800">
-                <Image src={logo} alt="logo" width={100} height={100} />
+                <Image alt="logo" height={100} src={logo} width={100} />
             </td>
             <td className="py-4 px-6 text-center text-gray-800">{name}</td>
             <td className="py-4 px-6 text-center text-gray-800">{email}</td>

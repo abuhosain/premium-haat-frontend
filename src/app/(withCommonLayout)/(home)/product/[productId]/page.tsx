@@ -169,7 +169,7 @@ const ProductDetailsPage = ({ params }: { params: Promise<Params> }) => {
             "Can I return this product?",
             "Does this product come with free shipping?",
           ].map((question, index) => (
-            <Disclosure as="div" key={index}>
+            <Disclosure key={index} as="div">
               {({ open }) => (
                 <>
                   <Disclosure.Button className="w-full text-left py-4 text-lg font-semibold text-gray-800 border-b border-gray-300 focus:outline-none">

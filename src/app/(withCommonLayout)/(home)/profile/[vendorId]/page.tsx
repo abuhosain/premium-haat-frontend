@@ -54,11 +54,11 @@ const VendorProfilePage = ({ params }: { params: Promise<Params> }) => {
           <div className="flex items-center space-x-4 mb-6">
             {vendor.logo && (
               <Image
-                src={vendor.logo}
                 alt={`${vendor?.name} logo`}
-                width={100}
-                height={100}
                 className="rounded-full"
+                height={100}
+                src={vendor.logo}
+                width={100}
               />
             )}
             <div>
