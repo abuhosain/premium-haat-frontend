@@ -35,6 +35,10 @@ const PopularProduct = () => {
             slidesPerView: 3,
             spaceBetween: 24,
           },
+          1100: {
+            slidesPerView: 4,
+            spaceBetween: 24,
+          },
         }}
         className="mySwiper"
         cssMode={true}
