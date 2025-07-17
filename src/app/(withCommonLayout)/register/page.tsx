@@ -43,7 +43,7 @@ const RegisterPage = () => {
           <div className="p-4 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white mb-6 shadow-md">
             <Users className="w-10 h-10" />
           </div>
-          <h2 className="text-3xl font-bold mb-4 text-slate-900 dark:text-white">Create Customer Account</h2>
+          <h2 className="text-3xl font-bold mb-4 text-slate-900 dark:text-white">Create Customer</h2>
           <p className="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
             Register as a customer to explore a vast collection of products, enjoy seamless shopping, and track your
             orders effortlessly.
@@ -52,7 +52,7 @@ const RegisterPage = () => {
             className="inline-flex items-center justify-center space-x-2 px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900"
             href="/register/customer"
           >
-            <span>Create Customer Account</span>
+            <span>Become a Customer</span>
             <ChevronRight className="w-4 h-4" />
           </Link>
         </div>
