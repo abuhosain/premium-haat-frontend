@@ -10,12 +10,12 @@ import SubNav from "../components/SubNav";
  
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name,
+    default: "Premium Marcket",
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
   icons: {
-    icon: "/favicon.ico",
+    icon: "../../public/favicon.png",
   },
 };
 
